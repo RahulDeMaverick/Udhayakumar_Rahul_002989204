@@ -9,6 +9,7 @@ import Business.Restaurant.Restaurant;
 import Business.Restaurant.RestaurantDirectory;
 import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
@@ -38,6 +39,7 @@ public class Restaurantdb extends javax.swing.JPanel {
         this.system = system;
         RestaurantDirectory res =system.getRestaurantDirectory();
         populate();
+        jPanel1.setVisible(false);
     }
     
        public void populate() {
@@ -52,9 +54,9 @@ public class Restaurantdb extends javax.swing.JPanel {
                     row[1] = res.getResName();
                     row[2] = res.getResManager();
                     row[3] = res.getResContact();
-                   // row[4] = rest.getRestEmail();
                     row[4] = res.getResAddress();
-                   // row[6] = rest.getRestZipCode();
+                    row[5] = res.getUname();
+                    row[6] = res.getUpass();
                     model.addRow(row);
 //                }
 //            }
@@ -77,8 +79,18 @@ public class Restaurantdb extends javax.swing.JPanel {
         lbl_RestDetails = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         JTblRestaurants = new javax.swing.JTable();
+        jPanel1 = new javax.swing.JPanel();
+        txtMgrName = new javax.swing.JTextField();
+        lblRestAddr = new javax.swing.JLabel();
+        lblMgrName = new javax.swing.JLabel();
+        txtRestName = new javax.swing.JTextField();
+        lblRestName = new javax.swing.JLabel();
+        txtRestContact = new javax.swing.JTextField();
+        lblRestContact = new javax.swing.JLabel();
+        txtRestAddr = new javax.swing.JTextField();
+        button1 = new java.awt.Button();
 
-        btnBack.setBackground(new java.awt.Color(204, 255, 255));
+        btnBack.setBackground(new java.awt.Color(255, 255, 255));
         btnBack.setFont(new java.awt.Font("Ebrima", 1, 12)); // NOI18N
         btnBack.setForeground(new java.awt.Color(0, 51, 51));
         btnBack.setText("Back");
@@ -89,7 +101,7 @@ public class Restaurantdb extends javax.swing.JPanel {
             }
         });
 
-        btnAddRest.setBackground(new java.awt.Color(204, 255, 255));
+        btnAddRest.setBackground(new java.awt.Color(255, 255, 255));
         btnAddRest.setFont(new java.awt.Font("Ebrima", 1, 12)); // NOI18N
         btnAddRest.setForeground(new java.awt.Color(0, 51, 51));
         btnAddRest.setText("Add Restaurant");
@@ -100,7 +112,7 @@ public class Restaurantdb extends javax.swing.JPanel {
             }
         });
 
-        btnViewRest.setBackground(new java.awt.Color(204, 255, 255));
+        btnViewRest.setBackground(new java.awt.Color(255, 255, 255));
         btnViewRest.setFont(new java.awt.Font("Ebrima", 1, 12)); // NOI18N
         btnViewRest.setForeground(new java.awt.Color(0, 51, 51));
         btnViewRest.setText("View Restaurant");
@@ -111,7 +123,7 @@ public class Restaurantdb extends javax.swing.JPanel {
             }
         });
 
-        btnDelRest.setBackground(new java.awt.Color(204, 255, 255));
+        btnDelRest.setBackground(new java.awt.Color(255, 255, 255));
         btnDelRest.setFont(new java.awt.Font("Ebrima", 1, 12)); // NOI18N
         btnDelRest.setForeground(new java.awt.Color(0, 51, 51));
         btnDelRest.setText("Delete Restaurant");
@@ -127,7 +139,6 @@ public class Restaurantdb extends javax.swing.JPanel {
         lbl_RestDetails.setForeground(new java.awt.Color(0, 51, 51));
         lbl_RestDetails.setText("Restaurants Database");
 
-        JTblRestaurants.setBackground(new java.awt.Color(204, 255, 255));
         JTblRestaurants.setForeground(new java.awt.Color(0, 51, 51));
         JTblRestaurants.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -137,7 +148,7 @@ public class Restaurantdb extends javax.swing.JPanel {
                 {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Restaurant No", "Name", "Manager", "Contact No", "Email", "Street Address", "Zipcode"
+                "Restaurant No", "Name", "Manager", "Contact No", "Address", "Username", "pass"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -149,6 +160,102 @@ public class Restaurantdb extends javax.swing.JPanel {
             }
         });
         jScrollPane1.setViewportView(JTblRestaurants);
+
+        txtMgrName.setFont(new java.awt.Font("Ebrima", 1, 12)); // NOI18N
+        txtMgrName.setForeground(new java.awt.Color(0, 51, 51));
+
+        lblRestAddr.setBackground(new java.awt.Color(204, 255, 255));
+        lblRestAddr.setFont(new java.awt.Font("Ebrima", 1, 12)); // NOI18N
+        lblRestAddr.setForeground(new java.awt.Color(0, 51, 51));
+        lblRestAddr.setText("Enter Street Address :");
+
+        lblMgrName.setBackground(new java.awt.Color(204, 255, 255));
+        lblMgrName.setFont(new java.awt.Font("Ebrima", 1, 12)); // NOI18N
+        lblMgrName.setForeground(new java.awt.Color(0, 51, 51));
+        lblMgrName.setText("Manager's Name :");
+
+        txtRestName.setFont(new java.awt.Font("Ebrima", 1, 12)); // NOI18N
+        txtRestName.setForeground(new java.awt.Color(0, 51, 51));
+
+        lblRestName.setBackground(new java.awt.Color(204, 255, 255));
+        lblRestName.setFont(new java.awt.Font("Ebrima", 1, 12)); // NOI18N
+        lblRestName.setForeground(new java.awt.Color(0, 51, 51));
+        lblRestName.setText("Enter Restaurant Name :");
+
+        txtRestContact.setFont(new java.awt.Font("Ebrima", 1, 12)); // NOI18N
+        txtRestContact.setForeground(new java.awt.Color(0, 51, 51));
+
+        lblRestContact.setBackground(new java.awt.Color(204, 255, 255));
+        lblRestContact.setFont(new java.awt.Font("Ebrima", 1, 12)); // NOI18N
+        lblRestContact.setForeground(new java.awt.Color(0, 51, 51));
+        lblRestContact.setText("Enter Contact No :");
+
+        txtRestAddr.setFont(new java.awt.Font("Ebrima", 1, 12)); // NOI18N
+        txtRestAddr.setForeground(new java.awt.Color(0, 51, 51));
+
+        button1.setLabel("button1");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(134, 134, 134)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblRestName)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(lblRestAddr)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(txtRestAddr, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(lblRestContact)
+                                    .addGap(77, 77, 77)
+                                    .addComponent(txtRestContact, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                    .addGap(9, 9, 9)
+                                    .addComponent(lblMgrName)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(txtMgrName, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(251, 251, 251)
+                        .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(114, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGap(323, 323, 323)
+                    .addComponent(txtRestName, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(114, Short.MAX_VALUE)))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtMgrName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(lblRestName)
+                        .addGap(44, 44, 44)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblRestContact)
+                            .addComponent(txtRestContact, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(37, 37, 37)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblRestAddr)
+                            .addComponent(txtRestAddr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(41, 41, 41)
+                        .addComponent(lblMgrName)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(24, 24, 24))
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGap(12, 12, 12)
+                    .addComponent(txtRestName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(256, Short.MAX_VALUE)))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -170,8 +277,11 @@ public class Restaurantdb extends javax.swing.JPanel {
                                     .addComponent(btnAddRest, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(btnViewRest, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(71, 71, 71)
-                                .addComponent(btnDelRest, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(176, Short.MAX_VALUE))
+                                .addComponent(btnDelRest, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(95, 95, 95)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(277, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -182,17 +292,18 @@ public class Restaurantdb extends javax.swing.JPanel {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(92, 92, 92)
+                        .addComponent(btnDelRest, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
                         .addGap(73, 73, 73)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnAddRest, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnBack))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnViewRest, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(92, 92, 92)
-                        .addComponent(btnDelRest, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(71, Short.MAX_VALUE))))
+                        .addComponent(btnViewRest, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -213,11 +324,26 @@ public class Restaurantdb extends javax.swing.JPanel {
 
     private void btnViewRestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewRestActionPerformed
         // TODO add your handling code here:
+jPanel1.setVisible(true);
+
 
     }//GEN-LAST:event_btnViewRestActionPerformed
 
     private void btnDelRestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelRestActionPerformed
-        // TODO add your handling code here:
+                int selectedRow = JTblRestaurants.getSelectedRow();
+        int count = JTblRestaurants.getSelectedRowCount();
+        if (count == 1) {
+            if (selectedRow >= 0) {
+                int sb = JOptionPane.YES_NO_OPTION;
+                int sr = JOptionPane.showConfirmDialog(null, "Are you sure to delete??", "Warning", sb);
+                if (sr == JOptionPane.YES_OPTION) {
+                    resDirectory.deleteRestaurant(selectedRow, system);
+                    populate();
+                }
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Select a Row to continue.");
+        }
 
     }//GEN-LAST:event_btnDelRestActionPerformed
 
@@ -228,8 +354,18 @@ public class Restaurantdb extends javax.swing.JPanel {
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnDelRest;
     private javax.swing.JButton btnViewRest;
+    private java.awt.Button button1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblMgrName;
+    private javax.swing.JLabel lblRestAddr;
+    private javax.swing.JLabel lblRestContact;
+    private javax.swing.JLabel lblRestName;
     private javax.swing.JLabel lbl_RestDetails;
+    private javax.swing.JTextField txtMgrName;
+    private javax.swing.JTextField txtRestAddr;
+    private javax.swing.JTextField txtRestContact;
+    private javax.swing.JTextField txtRestName;
     // End of variables declaration//GEN-END:variables
 
 

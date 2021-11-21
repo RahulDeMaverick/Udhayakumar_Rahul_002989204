@@ -4,9 +4,12 @@
  */
 package Business.Role;
 
+import Business.Customer.CustomerDirectory;
 import Business.EcoSystem;
+import Business.Order.Menu;
 
 import Business.Organization;
+import Business.Restaurant.RestaurantDirectory;
 import Business.UserAccount.UserAccount;
 import userinterface.RestaurantAdminRole.AdminWorkAreaJPanel;
 import javax.swing.JPanel;
@@ -18,8 +21,8 @@ import javax.swing.JPanel;
 public class AdminRole extends Role{
 
     @Override
-    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, EcoSystem business) {
-        return new AdminWorkAreaJPanel(userProcessContainer);
+    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, EcoSystem business,RestaurantDirectory resDirectory, Menu menu,CustomerDirectory customerDirectory) {
+        return new AdminWorkAreaJPanel(userProcessContainer,account,business,resDirectory,menu,customerDirectory);
     }
 
     

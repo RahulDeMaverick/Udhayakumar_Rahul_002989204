@@ -4,8 +4,10 @@
  */
 package userinterface;
 
+import Business.Customer.CustomerDirectory;
 import Business.EcoSystem;
 import Business.DB4OUtil.DB4OUtil;
+import Business.Order.Menu;
 
 import Business.Organization;
 import Business.Restaurant.RestaurantDirectory;
@@ -28,17 +30,30 @@ public class MainJFrame extends javax.swing.JFrame {
     private DB4OUtil dB4OUtil = DB4OUtil.getInstance();
     
      private final RestaurantDirectory resDirectory;
+     private final Menu menu;
+     private final CustomerDirectory customerDirectory;
 
     public MainJFrame() {
         initComponents();
         system = dB4OUtil.retrieveSystem();
         this.setSize(1680, 1050);
+        if (system.getCustomerDirectory() == null) {
+            this.customerDirectory = new CustomerDirectory();
+        } else {
+            this.customerDirectory = system.getCustomerDirectory();
+        }
         
            if (system.getRestaurantDirectory() == null) {
             this.resDirectory = new RestaurantDirectory();
 
         } else {
             this.resDirectory = system.getRestaurantDirectory();
+        }
+                  if (system.getMenu()== null) {
+            menu = new Menu();
+
+        } else {
+            this.menu = system.getMenu();
         }
     }
 
@@ -150,7 +165,7 @@ public class MainJFrame extends javax.swing.JFrame {
         else{
              UserAccount useraccount = system.getUserAccountDirectory().authenticateUser(userNameJTextField.getText(), String.valueOf(passwordField.getPassword() ));
             CardLayout layout = (CardLayout)container.getLayout();
-            container.add("workarea",useraccount.getRole().createWorkArea(container ,useraccount, system));
+            container.add("workarea",useraccount.getRole().createWorkArea(container ,useraccount, system,resDirectory,menu,customerDirectory));
             layout.next(container);
             logoutJButton.setEnabled(true);
           // AdminWorkAreaJPanel adminwork = new AdminWorkAreaJPanel();

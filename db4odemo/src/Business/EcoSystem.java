@@ -8,6 +8,7 @@ package Business;
 
 import Business.Customer.CustomerDirectory;
 import Business.DeliveryMan.DeliveryManDirectory;
+import Business.Order.Menu;
 import Business.Restaurant.RestaurantDirectory;
 import Business.Role.Role;
 import Business.Role.SystemAdminRole;
@@ -22,6 +23,16 @@ import java.util.regex.Pattern;
 public class EcoSystem extends Organization{
     
     private static EcoSystem business;
+    private Menu menu;
+
+    public Menu getMenu() {
+        return menu;
+    }
+
+    public void setMenu(Menu menu) {
+        this.menu = menu;
+    }
+    
 
     public static EcoSystem getBusiness() {
         return business;

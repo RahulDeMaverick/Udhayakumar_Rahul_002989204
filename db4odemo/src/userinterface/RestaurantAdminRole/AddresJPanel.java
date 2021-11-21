@@ -261,13 +261,15 @@ public class AddresJPanel extends javax.swing.JPanel {
             
             object.setResName(customerName);
             object.setResAddress(customerAddr);
-            object.setResNo(customerContact);
+            object.setResContact(customerContact);
             object.setResManager(mgrName);
+            object.setUname(customerUserName);
+            object.setUpass(customerPass);
             resDirectory.addRestaurant(object);
             Employee employee = system.getEmployeeDirectory().createEmployee(object.getResNo() );
             system.setRestaurantDirectory(resDirectory);
             UserAccount account = system.getUserAccountDirectory().createUserAccount(customerUserName, customerPass, employee, new AdminRole());
-            JOptionPane.showMessageDialog(null, "New Restaurant "+account.getUsername()+" added to the System Successfully!");
+            JOptionPane.showMessageDialog(null, "Restaurant "+account.getUsername()+" added!");
            // clearAllFields();
         }
     }//GEN-LAST:event_btnAddRestActionPerformed
@@ -286,7 +288,7 @@ public class AddresJPanel extends javax.swing.JPanel {
         Component[] componentArray = container.getComponents();
         Component component = componentArray[componentArray.length - 1];
         Restaurantdb manageRestJPanel = (Restaurantdb) component;
-       // manageRestJPanel.populate();
+       manageRestJPanel.populate();
         CardLayout layout = (CardLayout) container.getLayout();
         layout.previous(container);
     }//GEN-LAST:event_btnBackActionPerformed

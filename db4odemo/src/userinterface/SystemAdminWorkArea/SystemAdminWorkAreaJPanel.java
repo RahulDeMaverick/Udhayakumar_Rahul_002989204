@@ -5,15 +5,19 @@
  */
 package userinterface.SystemAdminWorkArea;
 
+import Business.Customer.CustomerDirectory;
 import Business.EcoSystem;
+import Business.Order.Menu;
 
 import Business.Organization;
 import Business.Restaurant.RestaurantDirectory;
+import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
 import java.util.ArrayList;
 import javax.swing.JPanel;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
+import userinterface.CustomerRole.CustomerDB;
 import userinterface.RestaurantAdminRole.AdminWorkAreaJPanel;
 import userinterface.RestaurantAdminRole.Restaurantdb;
 
@@ -26,17 +30,25 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
     /**
      * Creates new form SystemAdminWorkAreaJPanel
      */
-    JPanel userProcessContainer;
-    EcoSystem ecosystem;
-    RestaurantDirectory restaurantDirectory;
+   private final JPanel userProcessContainer;
+    private final EcoSystem ecosystem;
+    private final UserAccount account;
+    private final RestaurantDirectory resDirectory;
+    private final Menu menu;
+    private final CustomerDirectory customerDirectory;
     
-    public SystemAdminWorkAreaJPanel(JPanel userProcessContainer,EcoSystem ecosystem) {
+    public SystemAdminWorkAreaJPanel(JPanel userProcessContainer,UserAccount account,EcoSystem ecosystem, RestaurantDirectory resDirectory,Menu menu,CustomerDirectory customerDirectory) {
         initComponents();
         this.userProcessContainer=userProcessContainer;
+        this.account = account;
         this.ecosystem=ecosystem;
-        this.restaurantDirectory = restaurantDirectory;
+        this.resDirectory = resDirectory;
+        this.menu = menu;
+        this.customerDirectory = customerDirectory;
         populateTree();
     }
+
+
     
     public void populateTree(){
         DefaultTreeModel model=(DefaultTreeModel)jTree.getModel();
@@ -157,11 +169,14 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnManageNetworkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageNetworkActionPerformed
-       
+        CustomerDB manageCustomersJPanel = new CustomerDB(userProcessContainer, ecosystem, customerDirectory);
+        userProcessContainer.add("manageCustomersJPanel", manageCustomersJPanel);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);       
     }//GEN-LAST:event_btnManageNetworkActionPerformed
 
     private void btnManageEnterpriseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageEnterpriseActionPerformed
-        Restaurantdb manageRestaurantJPanel = new Restaurantdb(userProcessContainer, ecosystem, restaurantDirectory);
+        Restaurantdb manageRestaurantJPanel = new Restaurantdb(userProcessContainer, ecosystem, resDirectory);
         userProcessContainer.add("manageRestaurantJPanel", manageRestaurantJPanel);
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);       

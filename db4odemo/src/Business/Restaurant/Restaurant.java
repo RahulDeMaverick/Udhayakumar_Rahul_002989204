@@ -18,6 +18,25 @@ public class Restaurant {
     private String resAddress;
     private String resManager;
     private String resContact;
+      private String uname;
+    private String upass;
+
+    public String getUname() {
+        return uname;
+    }
+
+    public void setUname(String uname) {
+        this.uname = uname;
+    }
+
+    public String getUpass() {
+        return upass;
+    }
+
+    public void setUpass(String upass) {
+        this.upass = upass;
+    }
+  
     
      public String getResNo() {
         return resNo;

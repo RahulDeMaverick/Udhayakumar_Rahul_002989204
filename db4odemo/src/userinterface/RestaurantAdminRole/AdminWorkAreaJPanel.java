@@ -3,7 +3,15 @@
 package userinterface.RestaurantAdminRole;
 
 
+import Business.Customer.CustomerDirectory;
+import Business.DeliveryMan.DeliveryManDirectory;
+import Business.EcoSystem;
+import Business.Order.Menu;
+import Business.Order.OrderDirectory;
+import Business.Restaurant.RestaurantDirectory;
+import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
+import static java.time.Clock.system;
 import javax.swing.JPanel;
 
 /**
@@ -12,14 +20,32 @@ import javax.swing.JPanel;
  */
 public class AdminWorkAreaJPanel extends javax.swing.JPanel {
     
-    JPanel userProcessContainer;
+ 
+       private final JPanel userProcessContainer;
+    private final RestaurantDirectory resDirectory;
+    private final EcoSystem system;
+    private final Menu menu;
+
+    private final UserAccount account;
+    private final CustomerDirectory customerDirectory;
+    //private final DeliveryManDirectory deliveryManDirectory;
+
     
     /** Creates new form AdminWorkAreaJPanel */
-    public AdminWorkAreaJPanel(JPanel userProcessContainer) {
+    public AdminWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, EcoSystem system, RestaurantDirectory restaurantDirectory, Menu menu,CustomerDirectory customerDirectory) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
-      
-        //valueLabel.setText();
+                //lblRestName.setText(account.getUsername());
+        //lblRestAdmin.setText(account.getEmployee().getName()+" 's Admin Page");
+        //this.userProcessContainer = userProcessContainer;
+        this.resDirectory = restaurantDirectory;
+        this.system = system;
+        this.menu = menu;
+        this.customerDirectory = customerDirectory;
+       // this.orderDirectory = orderDirectory;
+        this.account = account;
+       // this.deliveryManDirectory = deliveryManDirectory;
+  
     }
     
     /** This method is called from within the constructor to
@@ -86,7 +112,10 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_userJButtonActionPerformed
 
     private void manageEmployeeJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageEmployeeJButtonActionPerformed
-
+        MenuPanel restMenuJPanel = new MenuPanel(userProcessContainer, account, system, resDirectory, menu);
+        userProcessContainer.add("restMenuJPanel", restMenuJPanel);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
     }//GEN-LAST:event_manageEmployeeJButtonActionPerformed
 
     private void manageOrganizationJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageOrganizationJButtonActionPerformed

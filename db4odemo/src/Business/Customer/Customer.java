@@ -11,4 +11,59 @@ package Business.Customer;
  */
 public class Customer {
     
+            private String custID;
+    private String custName;
+    private String custContact;
+    private String custEmail;
+    private String custAddr;
+    private String custZipCode;
+
+    public String getCustID() {
+        return custID;
+    }
+
+    public void setCustID(String custID) {
+        this.custID = custID;
+    }
+
+    public String getCustName() {
+        return custName;
+    }
+
+    public void setCustName(String custName) {
+        this.custName = custName;
+    }
+
+    public String getCustContact() {
+        return custContact;
+    }
+
+    public void setCustContact(String custContact) {
+        this.custContact = custContact;
+    }
+
+    public String getCustEmail() {
+        return custEmail;
+    }
+
+    public void setCustEmail(String custEmail) {
+        this.custEmail = custEmail;
+    }
+
+    public String getCustAddr() {
+        return custAddr;
+    }
+
+    public void setCustAddr(String custAddr) {
+        this.custAddr = custAddr;
+    }
+
+    public String getCustZipCode() {
+        return custZipCode;
+    }
+
+    public void setCustZipCode(String custZipCode) {
+        this.custZipCode = custZipCode;
+    }
+
 }
