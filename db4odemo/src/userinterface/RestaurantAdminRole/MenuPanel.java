@@ -34,6 +34,7 @@ public class MenuPanel extends javax.swing.JPanel {
         this.system = system;
         this.menuDirectory = menuDirectory;
         this.account = account;
+        populatetable();
     }
 
     /**

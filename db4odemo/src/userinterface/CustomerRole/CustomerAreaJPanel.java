@@ -59,6 +59,17 @@ public class CustomerAreaJPanel extends javax.swing.JPanel {
 
     
     public void populateRequestTable(){
+                DefaultTableModel model = (DefaultTableModel) tblRestaurantList.getModel();
+        model.setRowCount(0);
+        //for (OrderItem item : menu.getMenuList()) {
+            Object[] row = new Object[5];
+            row[0] = "ccd";
+            row[1] = "ccd";
+            row[2] = "ccd";
+            row[3] = "ccd";
+            row[4] = "ccd";
+            model.addRow(row);
+        //}
         
     }
 
@@ -277,9 +288,9 @@ public class CustomerAreaJPanel extends javax.swing.JPanel {
 
     private void btnViewOrdersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewOrdersActionPerformed
         // TODO add your handling code here:
-//        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-//        OrderRequest orderRequest = new OrderRequest(userProcessContainer, userAccount, system, customerDirectory, resDirectory, deliveryManDirectory, menu,orderDir);
-//        userProcessContainer.add(orderRequest);
+//       CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+//       OrderRequest orderRequest = new OrderRequest(userProcessContainer, userAccount, system, customerDirectory, resDirectory, deldir, menu,orderDir);
+//       userProcessContainer.add(orderRequest);
 //        layout.next(userProcessContainer);
     }//GEN-LAST:event_btnViewOrdersActionPerformed
 
@@ -291,22 +302,22 @@ public class CustomerAreaJPanel extends javax.swing.JPanel {
             if (row >= 0) {
               int quantity = Integer.parseInt(cmboxQtyCount.getSelectedItem().toString());
                // Restaurant res = resDirectory.getResDirectory(menu.getOrderItemByKey(row).getRestaurantNo());
-               Restaurant res = resDirectory.getRestaurant(menu.getOrderItemByKey(row).getRestaurantNo());
+//               Restaurant res = resDirectory.getRestaurant(menu.getOrderItemByKey(row).getRestaurantNo());
                Customer customer = customerDirectory.getCustomer(userAccount.getEmployee().getName());
                 OrderItem item = menu.getOrderItemByKey(row);
                 String status = "Awaiting Order Confirmation";
 
-                Order orderRequest = orderDir.add();
-                orderRequest.setOrderNo("Order " + (orderDir.getOrderDir().size()));
-                orderRequest.setOrderItem(item);
-                orderRequest.setRestaurant(res);
-                orderRequest.setCustomer(customer);
-                orderRequest.setQuantity(quantity);
-                orderRequest.setMessage("Order Placed");
-                orderRequest.setSender(userAccount);
-                orderRequest.setStatus(status);
+                Order or = orderDir.add();
+                or.setOrderNo("Order " + (orderDir.getOrderDir().size()));
+                or.setOrderItem(item);
+                //orderRequest.setRestaurant();
+                or.setCustomer(customer);
+                or.setQuantity(quantity);
+                or.setMessage("Order Placed");
+                or.setSender(userAccount);
+                or.setStatus(status);
                 system.setOrderDir(orderDir);
-                system.getWorkQueue().getWorkRequestList().add(orderRequest);
+                system.getWorkQueue().getWorkRequestList().add(or);
                 JOptionPane.showMessageDialog(null, "Your Order has been sucessfully placed!");
             }
         } else {
