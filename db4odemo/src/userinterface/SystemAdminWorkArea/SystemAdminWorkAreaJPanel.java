@@ -6,8 +6,10 @@
 package userinterface.SystemAdminWorkArea;
 
 import Business.Customer.CustomerDirectory;
+import Business.DeliveryMan.DeliveryManDirectory;
 import Business.EcoSystem;
 import Business.Order.Menu;
+import Business.Order.OrderDirectory;
 
 import Business.Organization;
 import Business.Restaurant.RestaurantDirectory;
@@ -18,6 +20,7 @@ import javax.swing.JPanel;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import userinterface.CustomerRole.CustomerDB;
+import userinterface.DeliveryManRole.DeliverymanDB;
 import userinterface.RestaurantAdminRole.AdminWorkAreaJPanel;
 import userinterface.RestaurantAdminRole.Restaurantdb;
 
@@ -36,8 +39,10 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
     private final RestaurantDirectory resDirectory;
     private final Menu menu;
     private final CustomerDirectory customerDirectory;
+    private final OrderDirectory orderDir;
+    private final DeliveryManDirectory deldir;
     
-    public SystemAdminWorkAreaJPanel(JPanel userProcessContainer,UserAccount account,EcoSystem ecosystem, RestaurantDirectory resDirectory,Menu menu,CustomerDirectory customerDirectory) {
+    public SystemAdminWorkAreaJPanel(JPanel userProcessContainer,UserAccount account,EcoSystem ecosystem, RestaurantDirectory resDirectory,Menu menu,CustomerDirectory customerDirectory,OrderDirectory orderDir,DeliveryManDirectory deldir) {
         initComponents();
         this.userProcessContainer=userProcessContainer;
         this.account = account;
@@ -45,6 +50,8 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
         this.resDirectory = resDirectory;
         this.menu = menu;
         this.customerDirectory = customerDirectory;
+        this.orderDir = orderDir;
+        this.deldir= deldir;
         populateTree();
     }
 
@@ -183,7 +190,12 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnManageEnterpriseActionPerformed
 
     private void btnManageAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageAdminActionPerformed
-       
+           DeliverymanDB manageDeliveryJPanel = new DeliverymanDB(userProcessContainer, ecosystem, deldir);
+        userProcessContainer.add("manageDeliveryJPanel", manageDeliveryJPanel);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
+        
+        
     }//GEN-LAST:event_btnManageAdminActionPerformed
 
     private void jTreeValueChanged(javax.swing.event.TreeSelectionEvent evt) {//GEN-FIRST:event_jTreeValueChanged

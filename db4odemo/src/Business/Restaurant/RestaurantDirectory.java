@@ -30,6 +30,14 @@ public class RestaurantDirectory {
         this.resDirectory = resDirectory;
     }
     
+    public Restaurant getRestaurant(String id){
+        for(Restaurant restaurant: resDirectory){
+            if(restaurant.getResNo().equalsIgnoreCase(id)){
+                return restaurant;
+            }
+        }
+        return null;
+    }
     
     public void addRestaurant(Restaurant restaurant) {
        restaurant.setResNo("Restaurant "+(resDirectory.size()+1));

@@ -6,8 +6,10 @@
 package Business.Role;
 
 import Business.Customer.CustomerDirectory;
+import Business.DeliveryMan.DeliveryManDirectory;
 import Business.EcoSystem;
 import Business.Order.Menu;
+import Business.Order.OrderDirectory;
 import Business.Restaurant.RestaurantDirectory;
 import Business.UserAccount.UserAccount;
 import javax.swing.JPanel;
@@ -20,8 +22,8 @@ import userinterface.DeliveryManRole.DeliveryManWorkAreaJPanel;
 public class DeliverManRole extends Role {
 
     @Override
-    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, EcoSystem business,RestaurantDirectory resDirectory, Menu menu,CustomerDirectory customerDirectory) {
-        return new DeliveryManWorkAreaJPanel(userProcessContainer,account,business,resDirectory,menu,customerDirectory);//To change body of generated methods, choose Tools | Templates.
+    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, EcoSystem business,RestaurantDirectory resDirectory, Menu menu,CustomerDirectory customerDirectory,OrderDirectory orderDir,DeliveryManDirectory deldir) {
+        return new DeliveryManWorkAreaJPanel(userProcessContainer,account,business,resDirectory,menu,customerDirectory,orderDir,deldir);//To change body of generated methods, choose Tools | Templates.
   
     }
     

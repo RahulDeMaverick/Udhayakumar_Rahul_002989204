@@ -28,11 +28,12 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
 
     private final UserAccount account;
     private final CustomerDirectory customerDirectory;
-    //private final DeliveryManDirectory deliveryManDirectory;
+    private final OrderDirectory orderDir;
+    private final DeliveryManDirectory deliveryManDirectory;
 
     
     /** Creates new form AdminWorkAreaJPanel */
-    public AdminWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, EcoSystem system, RestaurantDirectory restaurantDirectory, Menu menu,CustomerDirectory customerDirectory) {
+    public AdminWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, EcoSystem system, RestaurantDirectory restaurantDirectory, Menu menu,CustomerDirectory customerDirectory,OrderDirectory orderDir, DeliveryManDirectory deliveryManDirectory) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
                 //lblRestName.setText(account.getUsername());
@@ -42,9 +43,9 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
         this.system = system;
         this.menu = menu;
         this.customerDirectory = customerDirectory;
-       // this.orderDirectory = orderDirectory;
+        this.orderDir = orderDir;
         this.account = account;
-       // this.deliveryManDirectory = deliveryManDirectory;
+       this.deliveryManDirectory = deliveryManDirectory;
   
     }
     
@@ -119,7 +120,10 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_manageEmployeeJButtonActionPerformed
 
     private void manageOrganizationJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageOrganizationJButtonActionPerformed
-
+ RestOrderJPanel restOrderJPanel = new RestOrderJPanel(userProcessContainer, account, system, resDirectory, deliveryManDirectory, menu,orderDir);
+        userProcessContainer.add("restOrderJPanel", restOrderJPanel);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
         
         
     }//GEN-LAST:event_manageOrganizationJButtonActionPerformed

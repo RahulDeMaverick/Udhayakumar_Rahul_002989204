@@ -9,6 +9,7 @@ package Business;
 import Business.Customer.CustomerDirectory;
 import Business.DeliveryMan.DeliveryManDirectory;
 import Business.Order.Menu;
+import Business.Order.OrderDirectory;
 import Business.Restaurant.RestaurantDirectory;
 import Business.Role.Role;
 import Business.Role.SystemAdminRole;
@@ -23,7 +24,28 @@ import java.util.regex.Pattern;
 public class EcoSystem extends Organization{
     
     private static EcoSystem business;
+        private RestaurantDirectory restaurantDirectory;
+    private CustomerDirectory customerDirectory;
+    private OrderDirectory orderDir;
     private Menu menu;
+
+    public CustomerDirectory getCustomerDir() {
+        return customerDir;
+    }
+
+    public void setCustomerDir(CustomerDirectory customerDir) {
+        this.customerDir = customerDir;
+    }
+
+
+    public OrderDirectory getOrderDir() {
+        return orderDir;
+    }
+
+    public void setOrderDir(OrderDirectory orderDir) {
+        this.orderDir = orderDir;
+    }
+        
 
     public Menu getMenu() {
         return menu;
@@ -65,8 +87,8 @@ public class EcoSystem extends Organization{
     public void setDeliveryManDirectory(DeliveryManDirectory deliveryManDirectory) {
         this.deliveryManDirectory = deliveryManDirectory;
     }
-    private RestaurantDirectory restaurantDirectory;
-    private CustomerDirectory customerDirectory;
+    private RestaurantDirectory restaurantDir;
+    private CustomerDirectory customerDir;
     private DeliveryManDirectory deliveryManDirectory;
 
     public EcoSystem(RestaurantDirectory restaurantDirectory, CustomerDirectory customerDirectory, DeliveryManDirectory deliveryManDirectory) {
@@ -101,21 +123,4 @@ public class EcoSystem extends Organization{
     }
     
     
-    public Boolean validateMobileNo(String phoneNo)
-    {
-        String regex = "^\\(?([0-9]{3})\\)?[-.\\s]?([0-9]{3})[-.\\s]?([0-9]{4})$";
-        Pattern pattern = Pattern.compile(regex);
-
-        Matcher matcher = pattern.matcher(phoneNo);
-        return (matcher.matches());
-       
-    }
-    public Boolean validateEmail(String email)
-    {
-        String regex = "^(.+)@(.+)$";
-        Pattern pattern = Pattern.compile(regex);
-
-        Matcher matcher = pattern.matcher(email);
-        return (matcher.matches());
-    }
 }

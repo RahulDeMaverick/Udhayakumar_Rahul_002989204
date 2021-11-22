@@ -284,30 +284,7 @@ public class UpdateCustomer extends javax.swing.JPanel {
         if( custName.isEmpty() || custContact.isEmpty() || custAddr.isEmpty() || custZipCode.isEmpty() || custEmail.isEmpty() ) {
             allSet = false;
             JOptionPane.showMessageDialog(null, "Kindly Enter all the required fields!");
-        }   else if (!system.validateMobileNo(custContact)) {
-            allSet = false;
-            JOptionPane.showMessageDialog(null, "Kindly enter a Valid Contact Number.");
-        }   else if (!system.validateEmail(custEmail)) {
-            allSet = false;
-            JOptionPane.showMessageDialog(null, "Kindly check the entered Email ID format.");
-        }   else if (!customerDirectory.isEmailUnique(custEmail)) {
-            if(!currentMailID.equals(currentMailID))
-            {
-                allSet = false;
-                JOptionPane.showMessageDialog(null, "Entered Email ID is already mapped to another Customer.");
-            }
-        }
-        if (!customerDirectory.isContactNoUnique(custContact)) {
-            if(!currentPhoneNo.equals(custContact)){
-                allSet = false;
-                JOptionPane.showMessageDialog(null, "Entered Contact No is already mapped to another Customer.");
-            }
-        }
-        if(allSet == true){
-            customerDirectory.updateCustomer(custID, custName, custContact, custAddr, custZipCode, custEmail);
-            JOptionPane.showMessageDialog(null, "Customer details updated!");
-            disableEdit();
-        }
+        } 
     }//GEN-LAST:event_btnSaveChangesActionPerformed
 
     private void btnEnableUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnableUpdateActionPerformed

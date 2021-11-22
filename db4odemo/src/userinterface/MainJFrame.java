@@ -7,7 +7,9 @@ package userinterface;
 import Business.Customer.CustomerDirectory;
 import Business.EcoSystem;
 import Business.DB4OUtil.DB4OUtil;
+import Business.DeliveryMan.DeliveryManDirectory;
 import Business.Order.Menu;
+import Business.Order.OrderDirectory;
 
 import Business.Organization;
 import Business.Restaurant.RestaurantDirectory;
@@ -32,6 +34,8 @@ public class MainJFrame extends javax.swing.JFrame {
      private final RestaurantDirectory resDirectory;
      private final Menu menu;
      private final CustomerDirectory customerDirectory;
+     private final OrderDirectory orderDir;
+     private final DeliveryManDirectory deldir;
 
     public MainJFrame() {
         initComponents();
@@ -54,6 +58,18 @@ public class MainJFrame extends javax.swing.JFrame {
 
         } else {
             this.menu = system.getMenu();
+        }
+                           if (system.getOrderDir()== null) {
+            orderDir = new OrderDirectory();
+
+        } else {
+            this.orderDir = system.getOrderDir();
+        }
+                           if (system.getDeliveryManDirectory()== null) {
+            deldir = new DeliveryManDirectory();
+
+        } else {
+            this.deldir = system.getDeliveryManDirectory();
         }
     }
 
@@ -165,7 +181,7 @@ public class MainJFrame extends javax.swing.JFrame {
         else{
              UserAccount useraccount = system.getUserAccountDirectory().authenticateUser(userNameJTextField.getText(), String.valueOf(passwordField.getPassword() ));
             CardLayout layout = (CardLayout)container.getLayout();
-            container.add("workarea",useraccount.getRole().createWorkArea(container ,useraccount, system,resDirectory,menu,customerDirectory));
+            container.add("workarea",useraccount.getRole().createWorkArea(container ,useraccount, system,resDirectory,menu,customerDirectory,orderDir,deldir));
             layout.next(container);
             logoutJButton.setEnabled(true);
           // AdminWorkAreaJPanel adminwork = new AdminWorkAreaJPanel();

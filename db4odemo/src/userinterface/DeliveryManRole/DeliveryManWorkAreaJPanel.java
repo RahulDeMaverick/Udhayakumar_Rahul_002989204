@@ -5,8 +5,10 @@
 package userinterface.DeliveryManRole;
 
 import Business.Customer.CustomerDirectory;
+import Business.DeliveryMan.DeliveryManDirectory;
 import Business.EcoSystem;
 import Business.Order.Menu;
+import Business.Order.OrderDirectory;
 import Business.Restaurant.RestaurantDirectory;
 
 import Business.UserAccount.UserAccount;
@@ -27,12 +29,14 @@ public class DeliveryManWorkAreaJPanel extends javax.swing.JPanel {
      private final RestaurantDirectory resDirectory;
      private final Menu menu;
      private final CustomerDirectory customerDirectory;
+     private final OrderDirectory orderDir;
+     private final DeliveryManDirectory deldir;
     
     
     /**
      * Creates new form LabAssistantWorkAreaJPanel
      */
-    public DeliveryManWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, EcoSystem business,RestaurantDirectory resDirectory, Menu menu,CustomerDirectory customerDirectory) {
+    public DeliveryManWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, EcoSystem business,RestaurantDirectory resDirectory, Menu menu,CustomerDirectory customerDirectory,OrderDirectory orderDir,DeliveryManDirectory deldir) {
         initComponents();
         
         this.userProcessContainer = userProcessContainer;
@@ -41,6 +45,9 @@ public class DeliveryManWorkAreaJPanel extends javax.swing.JPanel {
         this.business = business;
         this.menu = menu;
         this.customerDirectory = customerDirectory;
+        this.orderDir = orderDir;
+        this.deldir = deldir;
+        
         
         populateTable();
     }

@@ -4,14 +4,21 @@
  */
 package userinterface.CustomerRole;
 
+import Business.Customer.Customer;
 import Business.Customer.CustomerDirectory;
+import Business.DeliveryMan.DeliveryManDirectory;
 import Business.EcoSystem;
 import Business.Order.Menu;
+import Business.Order.Order;
+import Business.Order.OrderDirectory;
+import Business.Order.OrderItem;
+import Business.Restaurant.Restaurant;
 import Business.Restaurant.RestaurantDirectory;
 
 import Business.UserAccount.UserAccount;
 import Business.WorkQueue.WorkRequest;
 import java.awt.CardLayout;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
@@ -28,10 +35,12 @@ public class CustomerAreaJPanel extends javax.swing.JPanel {
     private final EcoSystem system;
     private final Menu menu;
     private final CustomerDirectory customerDirectory;
+    private final OrderDirectory orderDir;
+    private final DeliveryManDirectory deldir;
     /**
      * Creates new form DoctorWorkAreaJPanel
      */
-    public CustomerAreaJPanel(JPanel userProcessContainer, UserAccount account, EcoSystem system, RestaurantDirectory resDirectory, Menu menu,CustomerDirectory customerDirectory) {
+    public CustomerAreaJPanel(JPanel userProcessContainer, UserAccount account, EcoSystem system, RestaurantDirectory resDirectory, Menu menu,CustomerDirectory customerDirectory,OrderDirectory orderDir,DeliveryManDirectory deldir) {
         initComponents();
         
         this.userProcessContainer = userProcessContainer;
@@ -40,6 +49,8 @@ public class CustomerAreaJPanel extends javax.swing.JPanel {
         this.system = system;     
         this.userAccount = account;
         this.customerDirectory = customerDirectory;
+        this.orderDir = orderDir;
+        this.deldir = deldir;
 
         populateRequestTable();
     
@@ -198,18 +209,18 @@ public class CustomerAreaJPanel extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(504, Short.MAX_VALUE)
-                .addComponent(requestTestJButton)
-                .addGap(86, 86, 86))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
                 .addComponent(valueLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 299, Short.MAX_VALUE)
                 .addComponent(refreshTestJButton)
                 .addGap(103, 103, 103))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(requestTestJButton)
+                .addGap(41, 41, 41))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
@@ -224,7 +235,7 @@ public class CustomerAreaJPanel extends javax.swing.JPanel {
                             .addComponent(btnPlaceOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(70, 70, 70)
                             .addComponent(btnViewOrders, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addContainerGap(120, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -235,9 +246,9 @@ public class CustomerAreaJPanel extends javax.swing.JPanel {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(refreshTestJButton)
                         .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(160, 160, 160)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 274, Short.MAX_VALUE)
                 .addComponent(requestTestJButton)
-                .addContainerGap(202, Short.MAX_VALUE))
+                .addGap(88, 88, 88))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(107, 107, 107)
@@ -266,10 +277,10 @@ public class CustomerAreaJPanel extends javax.swing.JPanel {
 
     private void btnViewOrdersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewOrdersActionPerformed
         // TODO add your handling code here:
-        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-        OrderRequestJPanel orderRequest = new OrderRequestJPanel(userProcessContainer, userAccount, system, customerDirectory, restaurantDirectory, deliveryManDirectory, menuDirectory,orderDirectory);
-        userProcessContainer.add(orderRequest);
-        layout.next(userProcessContainer);
+//        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+//        OrderRequest orderRequest = new OrderRequest(userProcessContainer, userAccount, system, customerDirectory, resDirectory, deliveryManDirectory, menu,orderDir);
+//        userProcessContainer.add(orderRequest);
+//        layout.next(userProcessContainer);
     }//GEN-LAST:event_btnViewOrdersActionPerformed
 
     private void btnPlaceOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlaceOrderActionPerformed
@@ -278,22 +289,23 @@ public class CustomerAreaJPanel extends javax.swing.JPanel {
         int count = tblRestaurantList.getSelectedRowCount();
         if (count == 1) {
             if (row >= 0) {
-                int quantity = Integer.parseInt(cmboxQtyCount.getSelectedItem().toString());
-                Restaurant restaurant = restaurantDirectory.getRestaurant(menuDirectory.getOrderItemByKey(row).getRestaurantNo());
-                Customer customer = customerDirectory.getCustomer(userAccount.getEmployee().getName());
-                OrderItem item = menuDirectory.getOrderItemByKey(row);
+              int quantity = Integer.parseInt(cmboxQtyCount.getSelectedItem().toString());
+               // Restaurant res = resDirectory.getResDirectory(menu.getOrderItemByKey(row).getRestaurantNo());
+               Restaurant res = resDirectory.getRestaurant(menu.getOrderItemByKey(row).getRestaurantNo());
+               Customer customer = customerDirectory.getCustomer(userAccount.getEmployee().getName());
+                OrderItem item = menu.getOrderItemByKey(row);
                 String status = "Awaiting Order Confirmation";
 
-                Order orderRequest = orderDirectory.add();
-                orderRequest.setOrderNo("Order " + (orderDirectory.getOrderDir().size()));
+                Order orderRequest = orderDir.add();
+                orderRequest.setOrderNo("Order " + (orderDir.getOrderDir().size()));
                 orderRequest.setOrderItem(item);
-                orderRequest.setRestaurant(restaurant);
+                orderRequest.setRestaurant(res);
                 orderRequest.setCustomer(customer);
                 orderRequest.setQuantity(quantity);
                 orderRequest.setMessage("Order Placed");
                 orderRequest.setSender(userAccount);
                 orderRequest.setStatus(status);
-                system.setOrderDirectory(orderDirectory);
+                system.setOrderDir(orderDir);
                 system.getWorkQueue().getWorkRequestList().add(orderRequest);
                 JOptionPane.showMessageDialog(null, "Your Order has been sucessfully placed!");
             }
